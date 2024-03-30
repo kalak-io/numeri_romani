@@ -8,3 +8,10 @@ repos:
     -   id: end-of-file-fixer
     -   id: check-yaml
     -   id: check-added-large-files
+-   repo: local
+    hooks:
+      - id: cargofmt
+        name: cargofmt 
+        language: system
+        files: ^/
+        entry: bash -c 'cargo fmt --all -- --check'
