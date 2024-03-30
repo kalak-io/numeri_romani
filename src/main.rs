@@ -7,9 +7,9 @@ const MAX_LENGTH: u32 = "MMMMDCCCLXXXVIII".len() as u32;
 const AVAILABLE_SIGNS: [char; 7] = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
 const VALUE_SIGNS: [u32; 7] = [1, 5, 10, 50, 100, 500, 1000];
 
-fn sign_to_value(key: char) -> u32 {
-    for (sign, value) in AVAILABLE_SIGNS.iter().zip(VALUE_SIGNS.iter()) {
-        if key == *sign {
+fn sign_to_value(sign: char) -> u32 {
+    for (available_sign, value) in AVAILABLE_SIGNS.iter().zip(VALUE_SIGNS.iter()) {
+        if sign == *available_sign {
             return *value;
         }
     }
