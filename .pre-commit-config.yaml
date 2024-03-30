@@ -13,5 +13,5 @@ repos:
       - id: cargofmt
         name: cargofmt
         language: system
-        files: ^/.rs
+        files: \.(rs|toml)$
         entry: bash -c 'cargo fmt --all -- --check'
