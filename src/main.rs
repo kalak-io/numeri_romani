@@ -5,15 +5,18 @@ const MIN_LENGTH: u32 = 1;
 const MAX_LENGTH: u32 = "MMMMDCCCLXXXVIII".len() as u32;
 
 const AVAILABLE_SIGNS: [char; 7] = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
-const VALUE_SIGNS: [u32; 7] = [1, 5, 10, 50, 100, 500, 1000];
 
-fn sign_to_value(sign: char) -> u32 {
-    for (available_sign, value) in AVAILABLE_SIGNS.iter().zip(VALUE_SIGNS.iter()) {
-        if sign == *available_sign {
-            return *value;
-        }
+fn sign_to_value(sign: &char) -> u32 {
+    match sign {
+        'I' => 1,
+        'V' => 5,
+        'X' => 10,
+        'L' => 50,
+        'C' => 100,
+        'D' => 500,
+        'M' => 1000,
+        _ => 0,
     }
-    return 0;
 }
 #[rustfmt::skip]
 #[cfg(test)]
@@ -58,9 +61,9 @@ fn parse_roman(roman: &str) -> u32 {
     let mut previous_char: char = ' ';
     for c in roman.chars() {
         let mut previous_value: u32 = 0;
-        let value: u32 = sign_to_value(c);
+        let value: u32 = sign_to_value(&c);
         if AVAILABLE_SIGNS.contains(&previous_char) {
-            previous_value = sign_to_value(previous_char);
+            previous_value = sign_to_value(&previous_char);
         }
         result = if previous_value < value {
             // Substract previous_value to current value and revert previous add
