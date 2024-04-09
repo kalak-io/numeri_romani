@@ -25,7 +25,7 @@ mod sign_to_value;
 
 fn check_input(roman: &str) -> bool {
     let length = roman.len() as u32;
-    if MIN_LENGTH > length || length > MAX_LENGTH {
+    if !(MIN_LENGTH..=MAX_LENGTH).contains(&length) {
         return false;
     }
 
@@ -49,7 +49,7 @@ fn check_input(roman: &str) -> bool {
         }
         previous_char = c
     }
-    return true;
+    true
 }
 #[rustfmt::skip]
 #[cfg(test)]
@@ -96,8 +96,8 @@ fn main() {
     }
 
     let input: &str = input.trim();
-    if check_input(&input) {
-        let result = parse_roman(&input);
+    if check_input(input) {
+        let result = parse_roman(input);
         println!("The roman number {} equals {}", input, result);
     } else {
         println!("Bad input")
